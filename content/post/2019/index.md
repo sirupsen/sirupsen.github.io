@@ -91,7 +91,7 @@ clammed in mattresses that night for protection while their houses were being
 torn apart around them. We witnessed both the resilience of nature and people.
 We recommend it for the pristine nature, hikes, and the lovely locals.
 
-{{< img "*dominica*" "Boiling Lake in Dominica" >}}
+![](/2019/dominica.jpeg)
 
 In the early fall, we went to Europe. This was a combined trip for a friend's
 birthday, my conference talk in Dublin, and hiking. Slovenians have got to be
@@ -112,7 +112,7 @@ that it was a terrible idea to take that shortcut, that yes, it's on the trail
 maps, but it's not maintained.  And by the way, a few people die in these
 mountains every year (I am thrilled I didn't know this while I was out there).
 
-{{< img "*slovenia*" "The mountains I got lost in" >}}
+![](/2019/slovenia.jpeg)
 
 [napkin-talk]: https://www.youtube.com/watch?v=IxkSlnrRFqc
 [napkin-news]: /napkin

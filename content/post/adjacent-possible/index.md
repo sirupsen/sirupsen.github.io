@@ -27,7 +27,7 @@ you to is what we call the 'adjacent possible.' The adjacent possible is what's
 about a door away from being invented. I like to visualize the adjacent possible
 as coloured ("built") and uncoloured ("not built") nodes in a simple graph:
 
-{{< img "*adjacent_possible_simple*" "Adjacent Possible" >}}
+![](/adjacent-possible/adjacent_possible_simple.png)
 
 > In human culture, we like to think of breakthrough ideas as sudden
 > accelerations on the timeline, where a genius jumps ahead fifty years and
@@ -43,7 +43,7 @@ the invention of movable type, ink, paper, and the wine press. He had to
 customize the ink, press, and invent molds for the type -- but the printing
 press was very much ripe for plucking in the adjacent possible.
 
-{{< img "*adjacent_possible_printing_press*" "Adjacent Possible Printing Press" >}}
+![](/adjacent-possible/adjacent_possible_printing_press.png)
 
 When you internalize it, you start seeing it everywhere.
 
@@ -132,7 +132,7 @@ of work. Being too early means confusing the adjacent and remote possible.
 Despite online gaming being too early to become ubiquitous, the stage was set
 for the web. Half-coloured nodes signal immaturity:
 
-{{< img "*adj_int*" "Adjacent Possible Internet" >}}
+![](/adjacent-possible/adj_int.png)
 
 While Wilbur Wright knew we'd one day fly (_remote possible_), he had no idea if
 it was in the adjacent possible. He especially didn't know the timing. But he
@@ -158,7 +158,7 @@ every laptop having a webcam and every phone a front-facing camera. Babbage also
 got his timing wrong.  He was ~100 years too early with the first computer
 design, too.
 
-{{< img "*picturephone*" "Bell Labs' PicturePhone" >}}
+![](/adjacent-possible/picturephone.jpg)
 
 These are individual failures, but part of a healthy system. We _need_ people to
 try. While I believe this model is useful to reason about what can be built,
@@ -180,7 +180,7 @@ only have to look at Minecraft's success a decade later to know what could've
 succeeded: much simpler graphics. LEGO must've grinned their teeth when they saw
 Minecraft take off.
 
-{{< img "*darwin_minecraft*" "SGI" >}}
+![](/adjacent-possible/darwin_minecraft.png)
 
 Just because big graphics computers exist doesn't mean you have to use them.
 It's very easy to confuse the _eventually/remote possible_ with the _adjacent

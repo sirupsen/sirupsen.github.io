@@ -12,7 +12,7 @@ the client to acknowledge it received all those packets.
 Quick illustration of transferring ~15kb with an initial TCP slow start window
 (also referred to as initial congestion window or `initcwnd`) of 10 versus 30:
 
-{{< img "*initcwnds.png" "Map" >}}
+![](/napkin/problem-15/initcwnds.png)
 
 The larger the initial window, the more we can transfer in the first roundtrip,
 the faster your site is on the initial page load. For a large roundtrip time
@@ -46,7 +46,7 @@ analyze your own site. Based on the report, you can attempt to tune your page
 size, or tune your server's initial slow start window size (`initcwnd`) (see
 bottom of article). Read on, and we'll go into far more detail!
 
-{{< img "*initcwnd-script.png" "Map" >}}
+![](/napkin/problem-15/initcwnd-script.png)
 
 [gh]: https://github.com/sirupsen/initcwnd
 [tune]: https://cromwell-intl.com/open-source/performance-tuning/tcp.html
@@ -89,7 +89,7 @@ We'd expect something alone the lines of:
 * 2 TLS roundtrips to negotiate a _secure_ connection
 * 1 HTTP roundtrip to request the page and the server sending it
 
-{{< img "*roundtrips-1*" "Map" >}}
+![](/napkin/problem-15/roundtrips-1.png)
 
 To make things a little more interesting, we'll choose a site that is
 geographically further from me that isn't overly optimized: `information.dk`, a
@@ -104,7 +104,7 @@ determine [through `traceroute(1)`][trt] that my traffic is travelling to
 Copenhagen through the path Montreal -> New York -> Amsterdam -> Copenhagen.
 [Round-trip time is ~140ms][rtt].
 
-{{< img "*network*" "Map" >}}
+![](/napkin/problem-15/network.jpeg)
 
 If we add up the number of round-trips from our napkin model above (excluding
 DNS), we'd expect loading the Danish site would take us `4 * 140ms = 560ms`.
@@ -141,19 +141,19 @@ to that file in Wireshark in the TLS configuration.
 
 ## Problem 1: 3 TLS roundtrips rather than 2
 
-{{< img "*wireshark-overview*" "Map" >}}
+![](/napkin/problem-15/wireshark-overview.png)
 
 We see the TCP roundtrip as expected, `SYN` from the client, then `SYN+ACK` from
 the server. Bueno. But after that it looks fishy. We're seeing _3_ round-trips
 for TLS/SSL instead of the expected 2 from our drawing above!
 
-{{< img "*wireshark-tls-bad*" "Map" >}}
+![](/napkin/problem-15/wireshark-tls-bad.png)
  
 To make sure I wasn't misunderstanding something, I double-checked with
 `sirupsen.com`, and sure enough, it's showing the two roundtrips in Wireshark as
 anticipated:
 
-{{< img "*wireshark-tls-good*" "Map" >}}
+![](/napkin/problem-15/wireshark-tls-good.png)
 
 If we carefully study the annotated Wireshark dump above for the Danish
 newspaper, we can see that the problem is that for whatever reason the server is
@@ -161,7 +161,7 @@ waiting for a TCP ack in the middle of transmitting the certificate (packet 9).
 
 To make it a easier to parse, the exchange looks like this:
 
-{{< img "*roundtrips-2*" "Map" >}}
+![](/napkin/problem-15/roundtrips-2.png)
 
 Why is the server waiting for a TCP ACK from the client after transmitting ~4398
 bytes of the certificate? Why doesn't the server just send the whole certificate
@@ -195,7 +195,7 @@ flight.  Throughout the existence of the TCP connection's lifetime this dance
 will be tirelessly performed.  In TCP terms what we've called "in-flight" is
 referred to as the "congestion window" (or `cwnd` in short-form).
 
-{{< img "*slow-start.png" "slow start" >}}
+![](/napkin/problem-15/slow-start.png)
 
 Typically after the first packet has been lost the TCP implementation switches
 from the simple TCP slow start algorithm to a more complicated ["Congestion
@@ -242,7 +242,7 @@ Because of the exponential growth of the packets in flight, `initcwnd` matters
 quite a bit for how much data we can send in those first few precious
 roundtrips:
 
-{{< img "*initcwnd-graph.png" "slow start" >}}
+![](/napkin/problem-15/initcwnd-graph.png)
 
 As we saw in the intro, it's common among CDNs to raise the values from the
 default to e.g. 32 (~46kb). This makes sense, as you might be transmitting
@@ -272,7 +272,7 @@ In Wireshark, we can pull up a TCP view that'll give us an idea of how many
 roundtrips was required to complete the request ([`sirupsen/initcwnd`][gh] tries to
 guess this for you with an embarrassingly simple algorithm):
 
-{{< img "*roundtrips-3*" "Map" >}}
+![](/napkin/problem-15/roundtrips-3.png)
 
 We see the TCP roundtrip, 3 TLS roundtrips, and then 5-6 HTTP roundtrips to get
 the ~160kb page! Each little dot in the picture shows a packet, so you'll notice
@@ -285,7 +285,7 @@ Typically, the server will continue to double the number of packets (~1460 bytes
 
 When a TCP session starts, the client will advertise how many bytes _it_ allows in flight. This typically is much larger than the server is wiling to send off the bat. We can pull this up in the initial `SYN` package from the client and see that it's ~65kb:
 
-{{< img "*syn-window*" "Map" >}}
+![](/napkin/problem-15/syn-window.png)
 
 If the session had been much longer and we pushed up against that window, the client would've sent a TCP package updating the size of the receive window. So there's two windows at play: the server manages the number of packets in flight: the _congestion window_. The congestion window is controlled by the server's _congestion algorithm_ which is adjusted based on the number of successful roundtrips, but always capped by the client's _receive window_.
 
@@ -304,7 +304,7 @@ only transmitted ~64kb)
 The growth of the congestion window is a _textbook_ cubic function, it has a
 [perfect fit][fit]:
 
-{{< img "*regression*" "Map" >}}
+![](/napkin/problem-15/regression.png)
 
 I'm not entirely sure why it follows a cubic function. I expected TCP slow start
 to just double every roundtrip. :shrug: As far as I can gather, on modern TCP
@@ -317,7 +317,7 @@ This is part of why I wrote `sirupsen/initcwnd` to spit out the size of the
 windows, so you don't have to do any math or guesswork, here for a Github repo
 (uncompressed):
 
-{{< img "*initcwnd-script.png" "Map" >}}
+![](/napkin/problem-15/initcwnd-script.png)
 
 ## Consolidating our new model with the napkin math
 
@@ -350,7 +350,7 @@ servers that have different `initcwnd` values!
 
 The output of `sirupsen/initcwnd` will be something like:
 
-{{< img "*initcwnd-script.png" "Map" >}}
+![](/napkin/problem-15/initcwnd-script.png)
 
 Here we can see the size of the TCP windows. The initial window was 10 packets
 for Github.com, and then doubles every roundtrip. The last window isn't a full
