@@ -19,3 +19,6 @@ markup:
     noClasses: true
     style: github
     tabWidth: 2
+  goldmark:
+    renderer:
+      unsafe: true

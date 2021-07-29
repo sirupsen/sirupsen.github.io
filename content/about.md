@@ -2,6 +2,10 @@
 title: About
 ---
 
+<div id="subscribe">
+If you want to know what I'm doing [_now_][/now/].
+</div>
+
 I grew up in Aarhus, Denmark. The second-largest city in the country after
 Copenhagen. Sometimes we say that it's "the world's smallest biggest city",
 which I tend to agree with. In high school I used to compete for Denmark in
@@ -46,10 +50,10 @@ It's able to serve read-traffic out of multiple regions, [cache
 better][sfrcache], and is much more performant.
 
 In 2020, we've worked on patches to MySQL and real-time components for the Admin
-of Shopify. Currently, I'm working on building a search team at Shopify.
+of Shopify. For half of 2020 and 2021 I worked on expanding the search efforts at Shopify. In May 2021 I left Shopify.
 
-Outside of work, I spend time [reading][reading], [cooking][cooking],
-weightlifting, working on [personal software projects][airtable], and walking.
+I spend time [reading][reading], [cooking][cooking], weightlifting, working on
+[personal software projects][airtable], and paddling.
 
 If you need to [pronounce my name][name] in English.
 
