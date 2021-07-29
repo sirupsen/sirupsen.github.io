@@ -2,10 +2,6 @@
 title: About
 ---
 
-<div id="subscribe">
-If you want to know what I'm doing [_now_][/now/].
-</div>
-
 I grew up in Aarhus, Denmark. The second-largest city in the country after
 Copenhagen. Sometimes we say that it's "the world's smallest biggest city",
 which I tend to agree with. In high school I used to compete for Denmark in
