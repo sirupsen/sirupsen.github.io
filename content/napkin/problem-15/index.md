@@ -1,6 +1,6 @@
 ---
 date: "2021-07-13T00:00:00Z"
-title: "Napkin Problem 15: Increase Performance by Fitting In the Initial TCP Slow Start Window"
+title: "Napkin Problem 15: Increase HTTP Performance by Fitting In the Initial TCP Slow Start Window"
 ---
 
 Did you know that if your site's under ~12kb the first page will load
