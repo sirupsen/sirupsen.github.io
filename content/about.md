@@ -33,20 +33,24 @@ I started building the Service Communication team that's building the software
 to make it as easy as possible for applications built inside Shopify to talk to
 each other.
 
-Today, I run a lab called New Capabilities which boots up highly technical
-teams, straddling a role somewhere between project manager, manager, and
-engineer. I take help get projects off the ground, while building the team and
-enabling everyone on it to grow. My goal is to put the team in a position where
-they no longer need me as fast as possible.
+Starting in 2019, I ran a lab called New Capabilities which boots up highly
+technical teams, straddling a role somewhere between project manager, manager,
+and engineer. I take help get projects off the ground, while building the team
+and enabling everyone on it to grow. My goal is to put the team in a position
+where they no longer need me as fast as possible.
 
 In 2019 in New Capabilities we started a team to do a complete [rewrite of the
 Shopify Storefront][sfr], which serves all merchant store traffic. It's
 architected based on everything we have learned from running Shopify at scale.
 It's able to serve read-traffic out of multiple regions, [cache
-better][sfrcache], and is much more performant.
+better][sfrcache], and is much more performant. About a year and a bit after we
+started the project with a team of ~8, it was serving the vast majority of
+production traffic, much of it up to an order of magnitude faster.
 
 In 2020, we've worked on patches to MySQL and real-time components for the Admin
-of Shopify. For half of 2020 and 2021 I worked on expanding the search efforts at Shopify. In May 2021 I left Shopify.
+of Shopify. For half of 2020 and 2021 I worked on expanding the search efforts
+at Shopify. In May 2021 I left Shopify. No plans currently. Enjoying life, and
+will wait for the perfect pitch before batting at the next venue.
 
 I spend time [reading][reading], [cooking][cooking], weightlifting, working on
 [personal software projects][airtable], and paddling.
