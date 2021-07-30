@@ -1,7 +1,10 @@
 {{- $pctx := . -}}
 {{- if .IsHome -}}{{ $pctx = .Site }}{{- end -}}
-{{- $pages := $pctx.RegularPages -}}
-{{- $pages := ( where .Site.RegularPages.ByPublishDate.Reverse "Section" "post" )  }}
+
+{{- $regular := ( where .Site.RegularPages.ByPublishDate.Reverse "Section" "post" )  }}
+{{- $napkin := where .Site.RegularPages.ByPublishDate.Reverse "Section" "napkin" }}
+{{- $pages := union $regular $napkin }}
+
 {{- $limit := .Site.Config.Services.RSS.Limit -}}
 {{- if ge $limit 1 -}}
 {{- $pages = $pages | first $limit -}}
@@ -21,7 +24,7 @@
     {{ with .OutputFormats.Get "RSS" }}
 	{{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{ end }}
-    {{ range $pages }}
+    {{ range sort $pages "PublishDate" "desc" }}
     {{ if (not (isset .Params "hidden")) }}
     <item>
       <title>{{ .Title }}</title>
