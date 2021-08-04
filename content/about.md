@@ -50,7 +50,7 @@ production traffic, much of it up to an order of magnitude faster.
 In 2020, we've worked on patches to MySQL and real-time components for the Admin
 of Shopify. For half of 2020 and 2021 I worked on expanding the search efforts
 at Shopify. In May 2021 I left Shopify. No plans currently. Enjoying life, and
-will wait for the perfect pitch before batting at the next venue.
+will learn and live until I jump at the exact right opportunity.
 
 I spend time [reading][reading], [cooking][cooking], weightlifting, working on
 [personal software projects][airtable], and paddling.
