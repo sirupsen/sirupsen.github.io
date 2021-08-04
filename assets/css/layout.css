@@ -98,6 +98,10 @@ pre {
 }
 
 img {
+	max-width: 100%;
+}
+
+#article-content img {
 	margin-left: 0px;
 	margin-right: -550px;
 	position: relative;
