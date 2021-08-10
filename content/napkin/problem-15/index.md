@@ -44,7 +44,11 @@ size of the initial window for a number of common hosting providers:
 To generate this, I wrote a script that you can use [`sirupsen/initcwnd`][gh] to
 analyze your own site. Based on the report, you can attempt to tune your page
 size, or tune your server's initial slow start window size (`initcwnd`) (see
-bottom of article). Read on, and we'll go into far more detail!
+bottom of article). It's important to note that more isn't necessarily better
+here. Hosting providers have a hard job choosing a value. 10 might be the best
+setting for your site, or it might be 64. As a rule of thumb, if most of your
+clients are high-bandwidth connections, more is better. If not, you'll need to
+strike a balance. Read on, and you'll be an expert in this!
 
 ![](/napkin/problem-15/initcwnd-script.png)
 
