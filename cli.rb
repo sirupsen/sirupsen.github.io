@@ -1,6 +1,8 @@
 require 'thor'
 require 'uri'
 require 'json'
+require 'time'
+require 'date'
 require 'net/http'
 require 'pp'
 require 'pathname'
@@ -54,59 +56,64 @@ class Sirupsen < Thor
     end
   end
 
-  desc "goodreads", "Goodreads review sync"
-  def goodreads(name = nil)
-    require 'goodreads'
-    client = Goodreads.new(api_key: ENV["GOODREADS_KEY"], spi_secret: ENV["GOODREADS_SECRET"])
-    1.upto(100) do |page|
-      puts "Page: #{page}"
-      reviews = client.reviews(id: 38623347, per_page: 50, page: page)
-      return if reviews.empty?
-      reviews.each do |review|
-        # split is so that "where good ideas come from: the natural history of
-        # invention" doesn't have the last part in the slug.
-        book_title_short = review.book.title.split(":")[0]
-          .downcase.gsub(/ /, "-")
-          .gsub(/[^\w\-]/, "")
+  desc "goodreads", "Goodreads review download"
+  def goodreads(uri = nil)
+    require 'nokogiri'
+    raise "needs to be a review url" unless uri["review/show"]
+    html = `curl -s --tlsv1.2 -k -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" --fail --http1.1 #{uri.to_s}`
+    raise "failed to curl: #{html}" unless $?.success?
+    doc = Nokogiri::HTML(html)
 
-        icon = case review.rating.to_i
-               when 5
-                 "🥇"
-               when 4
-                 "🥈"
-               when 3
-                 "🥉"
-               when 2
-                 "🤷"
-               when 1
-                 "😞"
-               else
-                 "❓"
-               end
+    review = {
+      book_title: doc.at_css("a.bookTitle").text,
+      rating: doc.at_css(".rating .value-title").attributes["title"].value.to_i,
+      review: doc.at_css(".reviewText.description").children.to_html.strip,
+      authors: doc.css(".authorName").children.children.map { |e| e.text }.join(", "),
+      link: "https://goodreads.com#{doc.at_css(".bookTitle").attributes["href"].value}",
+      finished_reading: Time.parse(doc.css(".readingTimeline__text").map { |e| e.text.match(/(\w+, \d{4})\n–\n\nFinished Reading/) }.compact.first[1])
+    }
 
-        rating = review.rating.to_i > 0 ? review.rating : "-1"
+      book_title_short = review[:book_title].split(":")[0]
+        .downcase.gsub(/ /, "-")
+        .gsub(/[^\w\-]/, "")
 
-        body = review.body
-        body.gsub!(/&gt\;(.+?)\<br \/><br \/>/, "<blockquote>\\1</blockquote>")
+      icon = case review[:rating]
+             when 5
+               "🥇"
+             when 4
+               "🥈"
+             when 3
+               "🥉"
+             when 2
+               "🤷"
+             when 1
+               "😞"
+             else
+               "❓"
+             end
 
-        # byebug if review.book.title =~ /grit/i
+      rating = review[:rating] > 0 ? review[:rating] : "-1"
 
-        filename = "./content/books/#{book_title_short}.html"
-        File.open(filename, 'w+') do |f|
-          f.write("---\n")
-          f.write("date: \"#{Time.parse(review.read_at || review.date_added)}\"\n")
-          f.write("title: \"#{review.book.title}\"\n")
-          f.write("book_author: \"#{review.book.authors.author.name.gsub("\"", "'")}\"\n")
-          f.write("book_rating: \"#{rating}\"\n")
-          f.write("book_rating_icon: \"#{icon}\"\n")
-          f.write("book_publication_year: \"#{review.book.publication_year}\"\n")
-          f.write("book_goodreads_link: \"#{review.book.link}\"\n")
-          f.write("---\n\n<p>")
-          f.write(body.strip)
-          f.write("</p>")
-        end
+      body = review[:review]
+      body.gsub!(/&gt\;(.+?)\<br><br>/, "<blockquote>\\1</blockquote>")
+      body.gsub!("<br><br>","</p>\n\n<p>")
+      body.gsub!(/__(.+?)__/,"<i>\\1</i>")
+
+      # byebug if review.book.title =~ /grit/i
+
+      filename = "./content/books/#{book_title_short}.html"
+      File.open(filename, 'w+') do |f|
+        f.write("---\n")
+        f.write("date: \"#{review[:finished_reading].to_date}\"\n")
+        f.write("title: \"#{review[:book_title]}\"\n")
+        f.write("book_author: \"#{review[:authors]}\"\n")
+        f.write("book_rating: \"#{rating}\"\n")
+        f.write("book_rating_icon: \"#{icon}\"\n")
+        f.write("book_goodreads_link: \"#{review[:link]}\"\n")
+        f.write("---\n\n<p>")
+        f.write(body.strip)
+        f.write("</p>")
       end
-    end
   end
 end
 

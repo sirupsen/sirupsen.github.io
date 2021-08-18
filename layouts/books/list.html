@@ -1,16 +1,62 @@
 {{ define "main" }}
+{{ $pages := .Site.RegularPages.ByPublishDate }}
+{{ if .Params.list_sort_order }}
+  {{ $pages = ($pages.ByParam .Params.list_sort_order) }}
+{{ end }}
+{{ $pages = $pages.Reverse }}
+
+<style>
+{{ $layout := resources.Get "css/charts.css" | toCSS | minify }}
+{{ $layout.Content | safeCSS }}
+#book-chart {
+  height: 150px;
+  margin-bottom: 24px;
+  box-shadow: none;
+}
+</style>
+
 <header class="twelve columns offset-by-four" id="article-header">
+  <h1>Book Reviews</h1>
+
+  <table id="book-chart" class="charts-css column show-labels">
+    <caption>Books read by year</caption>
+
+    <thead>
+      <tr>
+        <th scope="col">Year</th>
+        <th scope="col">Read</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{ $count := 1 }}
+      {{ $last := "__first" }}
+      {{ $max := 62.0 }}
+
+      {{ $pagesForGraph := .Site.RegularPages.ByPublishDate.Reverse }}
+      {{ range ( where $pagesForGraph "Section" .Params.list ) }}
+        {{ $current := .Date.Format "2006" }}
+
+        {{ if or (eq $last $current) (eq $last "__first") }}
+          {{ $count = add $count 1 }}
+        {{ else }}
+          <tr>
+            <th scope="row">{{ $last }}</th>
+            <td style="--size:{{ div $count $max }};">{{ $count }}</td>
+          </tr>
+          {{ $count = 1 }}
+        {{ end }}
+
+        {{ $last = $current }}
+      {{ end }}
+    </tbody>
+  </table>
+
+  
   {{ .Content }}
 </header>
 
 <ul id="posts">
-  {{ $pages := .Site.RegularPages.ByPublishDate }}
-
-  {{ if .Params.list_sort_order }}
-    {{ $pages = ($pages.ByParam .Params.list_sort_order) }}
-  {{ end }}
-
-  {{ $pages = $pages.Reverse }}
 
   <li>
     <a class="eight columns offset-by-four">
