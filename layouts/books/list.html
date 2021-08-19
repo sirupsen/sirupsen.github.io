@@ -103,7 +103,12 @@
 
           <!-- {{.Params.book_rating}} / 5 -->
         </a>
-        <span style="padding-left: 8px;">{{.Date.Format "Jan 2006"}}</span>
+
+        {{ if eq (.Date.Format "Jan 2006") "Jan 0001" }}
+          <span style="padding-left: 8px;">Unknown</span>
+        {{ else }}
+          <span style="padding-left: 8px;">{{.Date.Format "Jan 2006"}}</span>
+        {{ end }}
       </div>
     </li>
   {{ end }}
