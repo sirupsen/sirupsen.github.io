@@ -64,14 +64,13 @@ class Sirupsen < Thor
     raise "failed to curl: #{html}" unless $?.success?
     doc = Nokogiri::HTML(html)
 
-    byebug
     review = {
       book_title: doc.at_css("a.bookTitle").text,
       rating: doc.at_css(".rating .value-title").attributes["title"].value.to_i,
       review: doc.at_css(".reviewText.description").children.to_html.strip,
       authors: doc.css(".authorName").children.children.map { |e| e.text }.join(", "),
       link: "https://goodreads.com#{doc.at_css(".bookTitle").attributes["href"].value}",
-      finished_reading: Time.parse(doc.css(".readingTimeline__text").map { |e| e.text.match(/(\w+ \d+, \d{4})\n–\n\nFinished Reading/) }.compact.first[1])
+      finished_reading: Time.parse(doc.css(".readingTimeline__text").map { |e| e.text.match(/(\w+ ?\d*, \d{4})\n–\n\nFinished Reading/) }.compact.first[1])
     }
 
       book_title_short = review[:book_title].split(":")[0]
