@@ -7,7 +7,7 @@ notice: "**June 2020:** If you landed here because you want to prepare and quali
 
 Back in January [Hailey Somerville][hailey] told me about her participation in the [Australian Informatics Competition][orac], a competition for Australian high school students in informatics. Having done mostly Web development so far, I became quite interested and searched for something similar in Denmark. To my surprise I found a Danish equivalent: [“Dansk Datalogi Dyst”][ddd] (DDD, Danish Informatics Competition). The ultimate goal of the national competitions, Danish as well as Australian, is to be elected as one of four to compete in the [International Olympiad in Informatics][ioi] (IOI), one of many international high school science olympiads. In Denmark the election process for the IOI-team consists of three phases: An online qualification round; where all Danish high schools can participate, The Nationals; competition for the 10 best from the qualification round, and the [Baltic Olympiad][boi]; where the six best from the Nationals compete against each other and participants from the other Nordic and Baltic countries. Finally the four best from the Baltic Olympiad are chosen to compete in IOI.
 
-This is the story of how I ended up qualifying for the toughest high school programming contest in the world (IOI), without knowing hardly anything about it.
+This is the story of how I ended up qualifying for the toughest high school programming contest in the world (IOI).
 
 ## Solving an NP-hard problem, without knowing of NP-hard problems
 
@@ -25,7 +25,7 @@ I was pretty disappointed with myself that I had not been able to score the 100 
 
 ## Nationals with a hangover
 
-In the end of February I received an email that I had been selected to participate in the Nationals in Informatics! Excited for the coming week, I went to Barcelona in mid-March with my class. We had a great trip, and after a physics teacher frighteningly keen on getting us into a strip club and solving [a preparation task][teleports] (teleports) given to us by the team leaders on the plane, I arrived 8 hours late at the boarding school where the Nationals were held.
+In the end of February I received an email that I had been selected to participate in the Nationals in Informatics! Excited for the coming week, I went to Barcelona in mid-March with my class. We had a great trip, and on the flight back I was working on solving a preparation task given to us by the team leaders on the plane, I regretably arrived 8 hours late at the boarding school where the Nationals were held.
 
 The purpose of the national competition is a weekend of intense training rounded off with a 5-hour IOI-style competition. Based on the general impression, results of the qualification tasks and tasks solved during the weekend as well as the results of the competition, 6 of the 10 in the Nationals were chosen to compete in the Baltic Olympiad. 
 
