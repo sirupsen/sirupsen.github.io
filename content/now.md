@@ -4,8 +4,10 @@ What I'm focusing on _now_. Inspired by [Sivers][sivers], with a slight twist
 towards routine/focus.
 
 + Computers
-  - [x] Napkin math blog post on minimizing TCP roundtrips for website performance (Jul 29, 2021)
-  - [ ] Napkin math blog post on a prefetcher with query merging
+  + Napkin math
+    - [x] Minimizing TCP roundtrips for website performance (Jul 29, 2021)
+    - [ ] Simulations
+    - [ ] Prefetcher with query merging
   + Data Science and Machine Learning Fundamentals
     - [ ] [Brilliant:][brilliant] Math Fundamentals
     - [x] Brilliant: Probability Fundamentals (Sep 3, 2021)
@@ -44,6 +46,12 @@ towards routine/focus.
   - Improve swimming (Winter, e.g. [this](https://hippointhebathtub.ca/))
   - Brilliant course?
   - 80,000 hours content
+
+> "Alex, I have come to the conclusion that productivity is the act of bringing
+> a company closer to its goal. Every action that brings a company closer to its
+> goal is productive. Every action that does not bring a company closer to its
+> goal is not productive. Do you follow me?" (Eliyahu M. Goldratt, Jeff Cox,
+> and David Whitford, The Goal)
 
 [no-speed-limit]: https://sive.rs/kimo
 [perfbook]: https://book.easyperf.net/perf_book
