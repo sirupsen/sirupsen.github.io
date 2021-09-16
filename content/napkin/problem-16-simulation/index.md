@@ -89,7 +89,7 @@ of the time.
 A few years ago, we were revisiting old systems as part of moving to Kubernetes.
 One system we had to adapt was a process spun up for every shard to do some
 book-keeping. We were discussing how we'd make sure we'd have at least ~2-3
-replicas per shard in the K8s setup (for high availability). Previously, we'd
+replicas per shard in the K8s setup (for high availability). Previously, we
 had a messy static configuration in Chef to ensure we had a service for each
 shard and that the replicas spread out among different servers, not something
 that easily translated itself to K8s.
@@ -171,7 +171,7 @@ Hormoz Kheradmand led most of this effort, and has written [this post][hormoz]
 about it in more detail. When Hormoz started working on the first load shedder,
 we were uncertain about what algorithms might work for shedding traffic fairly.
 It was a big topic of discussion in the lively office pod, just like the
-die-problem I opened with. Hormoz started [writing simulations][simulate] to
+dice-problem. Hormoz started [writing simulations][simulate] to
 develop a much better grasp on how various controls might behave. This worked
 out wonderfully, and also served to convince the team that a very simple
 algorithm for prioritizing traffic could work which Hormoz describes in [his
@@ -179,10 +179,9 @@ post][hormoz].
 
 Of course, before the simulations, we all started talking about Wikipedia
 entries of the complicated, cool stuff we could do. The simple simulations
-showed that none of that was necessary -- perfect! The value of exploratory
-simulation for nebulous tasks where it's hard to justify the complexity is
-tough. It gives a feedback loop, and typically a justification to keep V1
-simple.
+showed that none of that was necessary -- perfect! There's tremendous value in
+exploratory simulation for nebulous tasks that ooze of complexity. It gives a
+feedback loop, and typically a justification to keep V1 simple.
 
 Do you need to bin-pack tenants on `n` shards that are being filled up randomly?
 Sounds like _probabilities over time_, a lot of randomness, and smells of
