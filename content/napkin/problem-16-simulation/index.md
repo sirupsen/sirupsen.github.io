@@ -33,9 +33,9 @@ problems is the Monty Hall problem:
 >
 > -- [Wikipedia Entry for the Monty Hall problem][monty]
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Monty_open_door.svg/2560px-Monty_open_door.svg.png)
+![](/napkin/problem-16-simulation/monty.png)
 
-Against your intuition it is to your advantage to switch your choice. You will
+Against your intuition, it is to your advantage to switch your choice. You will
 win the car twice as much if you do! This completely stumped me. Take a moment
 to think about it.
 
@@ -44,9 +44,9 @@ didn't get it. Watched [videos][montyvid], now I think that..  maybe... I get
 it?  According to [Wikipedia][monty], Erdős, one of the most renowned
 mathematicians in history also wasn't convinced until he was shown a simulation!
 
-After writing [my simulation][montysim] however, I finally feel like I get it.
+After writing [my simulation][montysim], however, I finally feel like I get it.
 Writing a simulation not only gives you a result you can trust more than your
-intuition, but also develops your understanding of the problem dramatically. I
+intuition but also develops your understanding of the problem dramatically. I
 won't try to offer an in-depth explanation here, click the [video link
 above][montyvid], or try to implement a simulation -- and you'll see!
 
@@ -63,7 +63,7 @@ of the host opening a non-winning door, you improve your odds to 2/3 if you
 always switch.
 
 This is a good example of a deceptively difficult problem. We should simulate
-it, because it involves _probabilities over time_. If someone framed the Monty
+it because it involves _probabilities over time_. If someone framed the Monty
 Hall problem to you you'd intuitively just say 'no' or '1/3'. Any problem
 involving probabilities over time should _humble_ you. Walk away and quietly go
 write a simulation.
@@ -72,13 +72,13 @@ Now imagine when you add scale, queues, ... as most of the systems you work on
 likely have. Thinking you can reason about this off the top of your head might
 constitute a case of good ol' [Dunning-Kruger][dk]. If Bob's offering a perfect
 algorithm off the top of his head, call bullshit (unless he carefully frames it
-as a hypothesis to test in a simulator, thank you Bob).
+as a hypothesis to test in a simulator, thank you, Bob).
 
 When I used to do [informatics competitions][info] in high school, I was never
 confident in my correctness of the more math-heavy tasks -- so I would often
 write simulations for various things to make sure some condition held in a bunch
 of scenarios (often using binary search). Same principle at work: I'm much more
-confident most day-to-day developer would be able to write a good simulation
+confident most day-to-day developers would be able to write a good simulation
 than a closed-form mathematical solution. I once read something about a
 mathematician that spent a long time figuring out the optimal strategy in
 Monopoly. A computer scientist came along and wrote a simulator in a _fraction_
@@ -94,8 +94,8 @@ had a messy static configuration in Chef to ensure we had a service for each
 shard and that the replicas spread out among different servers, not something
 that easily translated itself to K8s.
 
-Below, the green dots denote the active replica for each shard. The red dots the
-inactive ones, for each shard:
+Below, the green dots denote the active replica for each shard. The red dots are
+the inactive replicas for each shard:
 
 ![](/napkin/problem-16-simulation/randomness-1.png)
 
@@ -107,7 +107,7 @@ didn't love either of them.
 As a quick, curious semi-jokingly thought-experiment I asked: 
 
 > "What if each process chooses a shard at random when booting, and we boot
-> enough that we are near-certain every shard has at least 2 replicas?"
+> enough that we are near certain every shard has at least 2 replicas?"
 
 To rephrase the problem in a 'mathy way', with `n` being the number of shards:
 
@@ -177,11 +177,12 @@ out wonderfully, and also served to convince the team that a very simple
 algorithm for prioritizing traffic could work which Hormoz describes in [his
 post][hormoz].
 
-Of course, prior to the simulations, we all started talking about Wikipedia
-entries of complicated, cool stuff we could do. The simple simulations showed
-that none of that was necessary -- perfect! The value of exploratory simulation
-for nebulous tasks where it's hard to justify the complexity is tough. It gives
-a feedback loop, and typically a justification to keep V1 simple.
+Of course, before the simulations, we all started talking about Wikipedia
+entries of the complicated, cool stuff we could do. The simple simulations
+showed that none of that was necessary -- perfect! The value of exploratory
+simulation for nebulous tasks where it's hard to justify the complexity is
+tough. It gives a feedback loop, and typically a justification to keep V1
+simple.
 
 Do you need to bin-pack tenants on `n` shards that are being filled up randomly?
 Sounds like _probabilities over time_, a lot of randomness, and smells of
